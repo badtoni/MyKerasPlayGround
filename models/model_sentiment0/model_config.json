@@ -1,0 +1,23 @@
+{
+  "data_set": {
+    "file_path": "tmp/training.1600000.processed.noemoticon.csv",
+    "trunc_type": "post",
+    "padding_type": "post",
+    "oov_tok": "<OOV>"
+  },
+  "embeddings": {
+    "embeddings_file_path": "tmp/glove.6B(1)/glove.6B.100d.txt",
+    "embedding_dim": 100
+  },
+  "model":{
+    "name": "simple_mnist_model.SimpleMnistModel",
+    "learning_rate": 0.001,
+    "optimizer": "adam"
+  },
+  "training":{
+    "num_epochs": 1,
+    "validation_split":0.1,
+    "max_sentence_length": 32,
+    "verbose_training": true
+  }
+}
