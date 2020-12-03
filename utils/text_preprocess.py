@@ -2,6 +2,7 @@ import os
 import io
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from utils.saves import save_tokenizer
 import csv, json
 import numpy as np
 import random
@@ -41,12 +42,7 @@ def tokenize_and_split_corpus(corpus, folder_path, config):
     word_index = tokenizer.word_index
     vocab_size = len(word_index)
 
-    tokenizer_file = os.path.join(folder_path, 'tokenizer.json')
-
-    # Save tockenizer into json file
-    tokenizer_json = tokenizer.to_json()
-    with io.open(tokenizer_file, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(tokenizer_json, ensure_ascii=False))
+    save_tokenizer(folder_path, tokenizer)
 
     sequences = tokenizer.texts_to_sequences(sentences)
     padded = pad_sequences(sequences, maxlen=config.training.max_sentence_length, padding=config.data_set.padding_type, truncating=config.data_set.trunc_type)

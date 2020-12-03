@@ -52,12 +52,12 @@ def train_network(folder_path):
         tf.keras.layers.Embedding(vocab_size+1, embedding_dim, batch_input_shape=[max_length, None], weights=[embeddings_matrix], trainable=False), #input_length=max_length
         # tf.keras.layers.Flatten(),
         tf.keras.layers.Dropout(0.2),
-        tf.keras.layers.Conv1D(64, 5, activation='relu'),   # Maybe make conv filters as large as the embedding dim 
+        tf.keras.layers.Conv1D(124, 5, activation='relu'),   # Maybe make conv filters as large as the embedding dim 
         tf.keras.layers.MaxPooling1D(pool_size=4),
-        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(128, return_sequences=True)),
-        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
+        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, return_sequences=True)),
+        # tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
         # tf.keras.layers.LSTM(64),
-        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(64, activation='relu'),
         tf.keras.layers.Dense(1, activation='sigmoid')
     ])
     

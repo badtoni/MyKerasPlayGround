@@ -1,11 +1,11 @@
-
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.collections import EventCollection
 import numpy as np
 import pandas as pd
 import os
 
-
+matplotlib.use("TkAgg")
 
 def evaluate(history, folder_path):
     #-----------------------------------------------------------

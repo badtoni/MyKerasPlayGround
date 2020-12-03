@@ -2,9 +2,9 @@ import numpy as np
 import os
 import sys
 from keras.preprocessing import image
-from keras_preprocessing.text import tokenizer_from_json
 from tensorflow.keras.models import Sequential, save_model, load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from utils.saves import get_tokenizer
 import json
 from utils.saves import get_model_path
 
@@ -20,13 +20,10 @@ def make_prediction(file_path, sample_input, sample_target):
   sample_list = []
   sample_list.append(sample_input)
 
-  tokenizer_path = os.path.join(file_path, 'tokenizer.json')
   model_path = get_model_path(file_path)
   # model_path = os.path.join(file_path, 'my_model')
 
-  with open(tokenizer_path) as f:
-    data = json.load(f)
-    tokenizer = tokenizer_from_json(data)
+  tokenizer = get_tokenizer(file_path)
 
   sequence = tokenizer.texts_to_sequences(sample_list)
   print(sequence)
@@ -44,30 +41,6 @@ def make_prediction(file_path, sample_input, sample_target):
   prediction = round(predictions[0][0])
 
   print(f'Ground truth: {sample_target} - Prediction: {prediction} - Precision: {predictions[0][0]}')
-
-
-
-
-# TODO create an upload function for predicting 
-# def upload_file():
-
-#   uploaded = files.upload()
-
-#   for fn in uploaded.keys():
-  
-#     # predicting images
-#     path = '/content/' + fn
-#     img = image.load_img(path, target_size=(# YOUR CODE HERE))
-#     x = image.img_to_array(img)
-#     x = np.expand_dims(x, axis=0)
-
-#     images = np.vstack([x])
-#     classes = model.predict(images, batch_size=10)
-#     print(classes[0])
-#     if classes[0]>0.5:
-#       print(fn + " is a dog")
-#     else:
-#       print(fn + " is a cat")
 
 
 
@@ -101,6 +74,37 @@ if __name__ == '__main__':
     # TODO throw exception here?
     print("missing or invalid arguments")
     exit(0)
+
+
+
+
+
+# TODO create an upload function for predicting 
+# def upload_file():
+
+#   uploaded = files.upload()
+
+#   for fn in uploaded.keys():
+  
+#     # predicting images
+#     path = '/content/' + fn
+#     img = image.load_img(path, target_size=(# YOUR CODE HERE))
+#     x = image.img_to_array(img)
+#     x = np.expand_dims(x, axis=0)
+
+#     images = np.vstack([x])
+#     classes = model.predict(images, batch_size=10)
+#     print(classes[0])
+#     if classes[0]>0.5:
+#       print(fn + " is a dog")
+#     else:
+#       print(fn + " is a cat")
+
+
+
+
+
+
 
   
 
